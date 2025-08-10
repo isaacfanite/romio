@@ -1,42 +1,41 @@
-# Next.js Dating (Starter)
+# Next.js Dating Site (Supabase + CometChat + EasyPay)
 
-This is a starter **Next.js** (app router, TypeScript) dating site scaffold with:
-- Beautiful Tailwind UI styled components (shadcn-friendly design)
-- Public pages, user profile, matches, chat placeholder
-- Admin dashboard (shadcn-style layout)
-- Subscription & paywall placeholders (Stripe integration points)
-- Mock API routes
+This repository is a **production-ready scaffold** for a dating site:
+- Next.js (Pages router)
+- UI: shadcn/ui (components scaffolded)
+- Auth & DB: Supabase (Postgres)
+- Realtime chat: CometChat integration
+- Payments: EasyPay (Uganda Mobile Money) integration (server endpoints + webhook)
+- Admin panel at `/admin` (role-based via Supabase)
+- Paywall: pay-to-view contacts & pay-to-chat
 
-## What you get
-A complete project scaffold you can run locally and extend.
+**IMPORTANT:** This scaffold contains placeholders for API keys and secrets. Fill `.env.local` from `.env.example` before deploying.
 
-## Setup (locally)
-1. Install dependencies:
+## What's included
+- `pages/` — Next.js pages (index, auth, profile, chat, admin)
+- `lib/` — supabase, cometchat, easypay helpers
+- `migrations/` — SQL migrations to create tables and geolocation index
+- `README` — this file
+- `env.example` — required environment variables
+
+## How to run (local)
+1. Install:
 ```bash
 npm install
 ```
-
-2. Initialize Tailwind:
-```bash
-npx tailwindcss init -p
-```
-
-3. (Optional) Install ShadCN UI and run their setup for components:
-```bash
-# install shadcn UI (optional but recommended)
-npm i @shadcn/ui
-npx shadcn-ui@latest init
-```
-
-4. Run dev:
+2. Copy `.env.example` to `.env.local` and fill values.
+3. Start dev server:
 ```bash
 npm run dev
 ```
 
-## Notes
-- This scaffold includes placeholders for Stripe keys and age verification.
-- Replace environment variables in `.env.local` (create at project root).
-- The admin dashboard is accessible at `/admin` (mock data).
-- Chat is stubbed out (use real-time service like Supabase Realtime, Pusher, or Socket.io).
+## Deployment
+Recommended: Vercel for Next.js + Supabase for Postgres/Storage. Set environment variables in Vercel. Configure EasyPay webhooks to point to `/api/webhooks/easypay`.
 
-Enjoy!  
+## Files of interest
+- `pages/api/auth/*` - Supabase session helpers (server)
+- `pages/api/easypay/*` - EasyPay initiation & webhook
+- `lib/supabase.js` - Supabase client
+- `lib/cometchat.js` - CometChat init helper
+- `migrations/001_init.sql` - DB schema
+
